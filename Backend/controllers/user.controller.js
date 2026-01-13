@@ -77,9 +77,13 @@ export const signup=async (req,res)=>{
 
   const user=await Usermodel.findOne({email:email})
   
+  if (!user) {
+    return res.status(401).json({error:"wrong credentials"})
+  }
+  
   const ispassword=await bcrypt.compare(password, user.password)
 
-  if( !user || !ispassword){
+  if(!ispassword){
     return res.status(401).json({error:"wrong credentials"})
   }
 // jwt code
@@ -99,15 +103,12 @@ export const signup=async (req,res)=>{
 
 
 
-
   res.cookie("jwt",token,cookieoption)
 
 
 res.send({message:"login sucessful",user,token})
 
- 
 }
-
 export const logout=(req,res)=>{
     
   try {

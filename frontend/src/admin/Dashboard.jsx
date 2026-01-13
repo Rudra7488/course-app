@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   const handleLogout=async ()=>{
     try {
-        const response= await axios.get("http://localhost:4000/admin/logout",{withCredentials:true})
+        const response= await axios.get("http://localhost:5000/admin/logout",{withCredentials:true})
         console.log(response.data);
 
         toast.success(response.data.message);

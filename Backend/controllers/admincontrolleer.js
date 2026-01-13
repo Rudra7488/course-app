@@ -71,9 +71,14 @@ export const signup=async (req,res)=>{
   const {email,password}=req.body
 
   const admin=await adminmodel.findOne({email:email})
+  
+  if (!admin) {
+    return res.status(401).json({error:"wrong credentials"})
+  }
+  
   const ispassword=await bcrypt.compare(password,admin.password)
 
-  if( !admin || !ispassword){
+  if(!ispassword){
     return res.status(401).json({error:"wrong credentials"})
   }
 // jwt code

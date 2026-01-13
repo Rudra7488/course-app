@@ -53,7 +53,7 @@ if (!token) {
     
           try {
             
-            const response = await axios.get("http://localhost:4000/user/purchase",{
+            const response = await axios.get("http://localhost:5000/user/purchase",{
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -80,7 +80,7 @@ if (!token) {
       // Logout
   const handlelogout = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/user/logout`, {
+      const response = await axios.get(`http://localhost:5000/user/logout`, {
         withCredentials: true,
       });
       toast.success(response.data.message);

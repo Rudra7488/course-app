@@ -3,7 +3,9 @@ dotenv.config()
 
    export const jwt_user_password=process.env.JWT_WEBTOKEN
    export const jwt_admin_password=process.env.JWT_ADMINTOKEN
-   export const STRIPE_SECRET_KEY="sk_test_51QxOcnDSMxyLZpYGLXqTzvsloH5rpBF4qhgKGUbCvGWeCEbpQ5aas3kZKErmNU69m45bce3cz7r0l8XsP83fUsC000e4Lz5Lse"
+   export const RAZORPAY_KEY_ID=process.env.RAZORPAY_KEY_ID
+   export const RAZORPAY_KEY_SECRET=process.env.RAZORPAY_KEY_SECRET
+   export const CURRENCY=process.env.CURRENCY || "INR"
 
 
   

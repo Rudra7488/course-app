@@ -17,7 +17,7 @@ const UpdateCourses = () => {
     useEffect(() => {
       const fetchCourseData = async () => {
         try {
-          const { data } = await axios.get(`http://localhost:4000/course/${id}`, {
+          const { data } = await axios.get(`http://localhost:5000/course/${id}`, {
             withCredentials: true,
           });
           console.log(data);
@@ -68,7 +68,7 @@ const UpdateCourses = () => {
   
       try {
         const response = await axios.put(
-          `http://localhost:4000/course/update/${id}`,
+          `http://localhost:5000/course/update/${id}`,
           formData,
           {
             headers: {

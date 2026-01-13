@@ -29,7 +29,7 @@ const OurCourses = () => {
     
     const fetchdata = async () => {
         try {
-            const response = await axios.get("http://localhost:4000/course/view",{withCredentials:true})
+            const response = await axios.get("http://localhost:5000/course/view",{withCredentials:true})
             
             
             setCourses(response.data.course)
@@ -47,7 +47,7 @@ const OurCourses = () => {
  const handleDelete = async (id) => {
   try {
     const response = await axios.delete(
-      `http://localhost:4000/course/delete/${id}`,
+      `http://localhost:5000/course/delete/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

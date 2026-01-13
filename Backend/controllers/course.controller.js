@@ -1,8 +1,8 @@
 import { Course } from "../models/coursemodel.js";
 import { v2 as cloudinary } from 'cloudinary';
 import { Purchase } from "../models/purchasemodel.js";
-import Stripe from 'stripe';
-import { STRIPE_SECRET_KEY } from "../config.js";
+import Razorpay from 'razorpay';
+import { RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET, CURRENCY } from "../config.js";
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -168,9 +168,11 @@ export const courseDetails = async (req, res) => {
 
 
 
-// payment method
-const stripe= new Stripe(STRIPE_SECRET_KEY)
-//console.log(stripe)
+// payment method - Razorpay
+const razorpay = new Razorpay({
+  key_id: RAZORPAY_KEY_ID,
+  key_secret: RAZORPAY_KEY_SECRET
+});
 
 export const buycourses=async (req,res)=>{
    
@@ -194,20 +196,23 @@ export const buycourses=async (req,res)=>{
             return res.status(400).json({errors:"user has already purchased this product"})
         }
       
-   // stripe payment code goes here!!
-   const amount = course.price;
-   const paymentIntent = await stripe.paymentIntents.create({
+   // Razorpay order creation
+   const amount = course.price * 100; // Razorpay accepts amount in paise
+   const options = {
      amount: amount,
-     currency: "usd",
-     payment_method_types: ["card"],
-   });
-    const json=paymentIntent.client_secret
-    console.log(json)
+     currency: CURRENCY,
+     receipt: `rcpt_${Date.now()}` // Max 40 chars
+   };
+   
+   const order = await razorpay.orders.create(options);
+   
    res.status(201).json({
-       message: "Course purchased successfully",
+       message: "Order created successfully",
        course,
-       
-       clientSecret: paymentIntent.client_secret,
+       orderId: order.id,
+       amount: order.amount,
+       currency: order.currency,
+       keyId: RAZORPAY_KEY_ID
      });
 
 
@@ -219,7 +224,7 @@ export const buycourses=async (req,res)=>{
       
        
     }  catch (error) {
-        res.status(500).json({ errors: "Error in course buying" });
+        res.status(500).json({ errors: "Error in course buying", details: error.message });
         console.log("error in course buying ", error);
       }
     

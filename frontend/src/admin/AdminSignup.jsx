@@ -16,7 +16,7 @@ const AdminSignup = () => {
    
 
     try {
-      const response=await axios.post("http://localhost:4000/admin/signup",{
+      const response=await axios.post("http://localhost:5000/admin/signup",{
         firstname,lastname,email,password
       },{
         withCredentials:true,
