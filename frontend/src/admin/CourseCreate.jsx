@@ -40,8 +40,9 @@ const formData = new FormData();
     }
 
     try {
+      const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
       const response = await axios.post(
-        `http://localhost:5000/course/create`,
+        `${apiUrl}/course/create`,
         formData,
         {
           headers: {

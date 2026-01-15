@@ -5,6 +5,8 @@ import axios from 'axios'
 import toast from "react-hot-toast";
 
 const AdminSignup = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+  
   const [firstname,setfirstname]=useState("")
   const [lastname,setlastname]=useState("")
   const [email,setemail]=useState("")
@@ -16,7 +18,7 @@ const AdminSignup = () => {
    
 
     try {
-      const response=await axios.post("http://localhost:5000/admin/signup",{
+      const response=await axios.post(`${apiUrl}/admin/signup`,{
         firstname,lastname,email,password
       },{
         withCredentials:true,

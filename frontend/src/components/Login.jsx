@@ -7,6 +7,7 @@ import axios from 'axios'
 
 
 const Login = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
   
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
@@ -17,7 +18,7 @@ const Login = () => {
    
 
     try {
-      const response=await axios.post("http://localhost:5000/user/login",{
+      const response=await axios.post(`${apiUrl}/user/login`,{
         email,password
       },{
         withCredentials:true,

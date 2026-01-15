@@ -14,7 +14,7 @@ import { Link,useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const Courses = () => {
- 
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
  
     const [courses,setcourses]=useState([])
@@ -42,7 +42,7 @@ const Courses = () => {
     
             const fetchdata = async () => {
                 try {
-                    const response = await axios.get("http://localhost:5000/course/view",{withCredentials:true})
+                    const response = await axios.get(`${apiUrl}/course/view`,{withCredentials:true})
                     
                     
                     setcourses(response.data.course)
@@ -60,7 +60,7 @@ const Courses = () => {
     
         const handlelogout=async ()=>{
             try {
-                const response= await axios.get("http://localhost:5000/user/logout",{withCredentials:true})
+                const response= await axios.get(`${apiUrl}/user/logout`,{withCredentials:true})
                 console.log(response.data);
     
                 toast.success(response.data.message);

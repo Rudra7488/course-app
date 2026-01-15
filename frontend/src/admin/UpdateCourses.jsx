@@ -15,9 +15,10 @@ const UpdateCourses = () => {
     
     const navigate=useNavigate()
     useEffect(() => {
+      const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
       const fetchCourseData = async () => {
         try {
-          const { data } = await axios.get(`http://localhost:5000/course/${id}`, {
+          const { data } = await axios.get(`${apiUrl}/course/${id}`, {
             withCredentials: true,
           });
           console.log(data);
@@ -67,8 +68,9 @@ const UpdateCourses = () => {
       }
   
       try {
+        const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
         const response = await axios.put(
-          `http://localhost:5000/course/update/${id}`,
+          `${apiUrl}/course/update/${id}`,
           formData,
           {
             headers: {

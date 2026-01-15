@@ -7,6 +7,7 @@ import axios from 'axios'
 
 
 const AdminLogin = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
   
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
@@ -17,7 +18,7 @@ const AdminLogin = () => {
    
 
     try {
-      const response=await axios.post("http://localhost:5000/admin/login",{
+      const response=await axios.post(`${apiUrl}/admin/login`,{
         email,password
       },{
         withCredentials:true,

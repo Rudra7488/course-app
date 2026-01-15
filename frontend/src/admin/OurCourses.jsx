@@ -26,10 +26,11 @@ const OurCourses = () => {
   // fetch course
     
   useEffect(() => {
+    const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     
     const fetchdata = async () => {
         try {
-            const response = await axios.get("http://localhost:5000/course/view",{withCredentials:true})
+            const response = await axios.get(`${apiUrl}/course/view`,{withCredentials:true})
             
             
             setCourses(response.data.course)
@@ -45,9 +46,10 @@ const OurCourses = () => {
 
  // delete courses code
  const handleDelete = async (id) => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
   try {
     const response = await axios.delete(
-      `http://localhost:5000/course/delete/${id}`,
+      `${apiUrl}/course/delete/${id}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
