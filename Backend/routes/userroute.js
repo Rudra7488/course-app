@@ -2,10 +2,10 @@ import express from 'express'
 import { login, logout, purchases, signup } from '../controllers/user.controller.js';
 import { usermiddleware } from '../Middlewares/usermiddleware.js';
 
-const useRoutes= express.Router();
+const userRoutes= express.Router();
+userRoutes.post('/signup',signup)
+userRoutes.post('/login',login)
+userRoutes.get('/logout',logout)
+userRoutes.get('/purchase',usermiddleware,purchases)
 
-useRoutes.post('/signup',signup)
-useRoutes.post('/login',login)
-useRoutes.get('/logout',logout)
-useRoutes.get('/purchase',usermiddleware,purchases)
-export  default useRoutes
+export default userRoutes;

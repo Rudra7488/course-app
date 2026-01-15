@@ -1,10 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import { connectdb } from './Database/db.js'
-import routes from './routes/courseroute.js'
+import courseroutes from './routes/courseroute.js'
 import fileUpload from 'express-fileupload'
 import { v2 as cloudinary } from 'cloudinary';
-import useRoutes from './routes/userroute.js'
+import userRoutes from './routes/userroute.js'
 import adminroute from './routes/adminroutes.js'
 import cookieparser from 'cookie-parser'
 import cors from 'cors'
@@ -15,33 +15,26 @@ dotenv.config()
 
 
 const app=express()
-app.get('/kuchbhi',(req,res)=>{
-    res.send('created')
-})
+
 app.use(express.json())
 app.use(cookieparser())
 
 
 
 
-// Configuration
+
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
 }));
-app.use(cors({
-    origin:process.env.FRONTEND_URL,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-}))
+app.use(cors())
 
 
 
 
 // routing
-app.use('/course',routes)
-app.use('/user',useRoutes)
+app.use('/course',courseroutes)
+app.use('/user',userRoutes)
 app.use('/admin',adminroute)
 app.use('/order',orderRoutes)
 
@@ -64,4 +57,3 @@ app.listen(process.env.PORT,()=>{
     connectdb()
 })
 
-export default app;

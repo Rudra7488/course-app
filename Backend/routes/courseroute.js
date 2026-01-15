@@ -8,18 +8,18 @@ import { adminmiddleware } from '../Middlewares/adminmiddleware.js'
 
 
 
-const routes=express.Router()
+const courseroutes=express.Router()
 
-routes.post('/create',adminmiddleware,coursecontroller)
+courseroutes.post('/create',adminmiddleware,coursecontroller)
 
-routes.put('/update/:courseid',adminmiddleware,updatecontroller)
+courseroutes.put('/update/:courseid',adminmiddleware,updatecontroller)
 
-routes.delete('/delete/:courseid',adminmiddleware,deletecontroller)
+        courseroutes.delete('/delete/:courseid',adminmiddleware,deletecontroller)
 
-routes.get('/view',getcontroller)
-routes.get('/:courseId',courseDetails)
-routes.post('/courses/:courseId',usermiddleware,buycourses)
+courseroutes.get('/view',getcontroller)
+courseroutes.get('/:courseId',courseDetails)
+courseroutes.post('/courses/:courseId',usermiddleware,buycourses)
 
 
 
-export default routes
+export default courseroutes

@@ -9,7 +9,9 @@ import { IoLogIn, IoLogOut } from 'react-icons/io5';
 import { HiMenu } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 
+
 const Purchases = () => {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   
   const [purchase,setpurchase]=useState([])

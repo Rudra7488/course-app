@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { jwt_user_password } from '../config.js';
+
 
  export const usermiddleware=(req,res,next)=>{
     
@@ -11,7 +11,7 @@ import { jwt_user_password } from '../config.js';
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token,jwt_user_password);
+    const decoded = jwt.verify(token,process.env.JWT_WEBTOKEN);
     
     req.userId = decoded.id;
 

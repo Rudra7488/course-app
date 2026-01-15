@@ -182,6 +182,10 @@ export const buycourses=async (req,res)=>{
     
 
     try {
+        // Log Razorpay credentials to verify they're loaded
+        console.log('Razorpay Key ID:', RAZORPAY_KEY_ID);
+        console.log('Currency:', CURRENCY);
+        
          const course=await Course.findById(courseId)
         
          
@@ -204,16 +208,26 @@ export const buycourses=async (req,res)=>{
      receipt: `rcpt_${Date.now()}` // Max 40 chars
    };
    
-   const order = await razorpay.orders.create(options);
+   console.log('Creating Razorpay order with options:', options);
    
-   res.status(201).json({
-       message: "Order created successfully",
-       course,
-       orderId: order.id,
-       amount: order.amount,
-       currency: order.currency,
-       keyId: RAZORPAY_KEY_ID
+   try {
+     const order = await razorpay.orders.create(options);
+     
+     res.status(201).json({
+         message: "Order created successfully",
+         course,
+         orderId: order.id,
+         amount: order.amount,
+         currency: order.currency,
+         keyId: RAZORPAY_KEY_ID
+       });
+   } catch (razorpayError) {
+     console.error('Razorpay API Error:', razorpayError);
+     return res.status(500).json({ 
+       errors: "Error creating Razorpay order", 
+       details: razorpayError.error?.description || razorpayError.message || 'Unknown Razorpay error'
      });
+   }
 
 
 

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 import { adminmodel } from '../models/adminmodel.js'
 import { jwt_admin_password } from '../config.js'
 
+
 export const signup=async (req,res)=>{
     
     const {firstname,lastname,email,password}=req.body

@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import { Usermodel} from "../models/user.model.js";
 import jwt from 'jsonwebtoken'
 import { jwt_user_password } from "../config.js";
+
 import { Course } from "../models/coursemodel.js";
 import { Purchase } from "../models/purchasemodel.js";
 
