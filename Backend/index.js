@@ -28,6 +28,7 @@ app.use(fileUpload({
     tempFileDir : '/tmp/'
 }));
 app.use(cors())
+app.get("/", (req, res) => res.send("API is running ✅"));
 
 
 
