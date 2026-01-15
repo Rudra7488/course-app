@@ -27,7 +27,11 @@ app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
 }));
-app.use(cors())
+app.use(cors({
+  origin: ["http://localhost:5173", "https://course-app-2hac.vercel.app"],
+  credentials: true
+}));
+
 app.get("/", (req, res) => res.send("API is running ✅"));
 
 
